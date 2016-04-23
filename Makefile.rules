@@ -82,6 +82,16 @@ endif
 
 $$(BUILD_DIR): ; @$$(MKDIR) $$@
 
+ifeq ($(SRCS),)
+$$(EXE):
+	@$$(call iterate_dirs, all, $$(SUB_DIRS))
+	$$(call print_info_msg, "nothing to build here")
+
+$$(LIB_NAME):
+	@$$(call iterate_dirs, all, $$(SUB_DIRS))
+	$$(call print_info_msg, "nothing to build here")
+
+else
 $$(EXE): $$(OBJS)
 	@$$(call iterate_dirs, all, $$(SUB_DIRS))
 	@$$(CXX) -o $$@ $$^ $$(LOCAL_LIB)
@@ -91,6 +101,7 @@ $$(LIB_NAME): CXXFLAGS+=-fPIC
 $$(LIB_NAME): $$(OBJS)
 	@$$(call iterate_dirs, all, $$(SUB_DIRS))
 	@$$(CXX) -shared -o lib$$@.so $$^ $$(LOCAL_LIB)
+endif
 
 $$(OBJS): | $$(BUILD_DIR)
 
