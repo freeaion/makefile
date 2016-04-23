@@ -1,0 +1,7 @@
+TODO: things to do and features to add
+---------------------------------------
+
+(a) make use of VPATH to compile a source code in any directory
+(b) support 'make install'
+
+- Yonghyun Hwang
